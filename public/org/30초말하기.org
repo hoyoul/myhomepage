@@ -1,0 +1,47 @@
+#+TITLE: 30초 말하기
+#+AUTHOR: Hoyoul Park
+#+DESCRIPTION: Org-HTML export made simple.
+#+KEYWORDS:  org-mode, export, html, theme, style, css, js, bigblow
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 toc:t num:2
+#+MACRO: color @@html:<font color=></font>@@
+#+PROPERTY:  header-args :padline no
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+LATEX_HEADER: \usepackage{kotex}
+#+latex_header: \hypersetup{colorlinks=true}
+* 1일(나의 오전 일과)
+1. 나는 일어난다. 7시에
+2. 나는 간다. 화장실에
+3. 나는 씻는다. 머리를
+4. 나는 씻는다. 얼굴을
+5. 나는 씻는다. 손을
+6. 나는 먹는다. 아침을
+7. 나는 먹는다. 사과를
+8. 나는 신는다. 내 신발을
+9. 나는 나선다. 회사로,학교로
+* 2일(나말고 걔)
+1. 나는 일어난다. 7시에
+2. 나는 간다. 화장실에
+3. 나는 씻는다. 머리를
+4. 나는 씻는다. 얼굴을
+5. 나는 씻는다. 손을
+6. 나는 먹는다. 아침을
+7. 나는 먹는다. 사과를
+8. 나는 신는다. 내 신발을
+9. 나는 나선다. 회사로,학교로
+* 3일(이미 일어난일 말하기)
+1. 나는 일어난다. 7시에
+2. 나는 간다. 화장실에
+3. 나는 씻는다. 머리를
+4. 나는 씻는다. 얼굴을
+5. 나는 씻는다. 손을
+6. 나는 먹는다. 아침을
+7. 나는 먹는다. 사과를
+8. 나는 신는다. 내 신발을
+9. 나는 나선다. 회사로,학교로
+* 4일(아니야, No!)
+* 5일(하니, 했니)
+* 6일(특정 시점 나타내기)
+* 7일(빈도 나타내기)
+* 8일(문장 연결하기)
+

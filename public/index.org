@@ -1,2 +1,2 @@
 * 30초 말하기
-[[https://s3.ap-northeast-2.amazonaws.com/holyfrege.me/org/30english.html/org/30english.html][30초말하기]]
+[[https://s3.ap-northeast-2.amazonaws.com/holyfrege.me/org/30english.html][30초말하기]]

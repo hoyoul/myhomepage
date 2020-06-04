@@ -1,0 +1,20 @@
+#+TITLE: Rails From Scratch
+#+AUTHOR: Hoyoul Park
+#+DESCRIPTION: Org-HTML export made simple.
+#+KEYWORDS:  org-mode, export, html, theme, style, css, js, bigblow
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 toc:t num:2
+#+MACRO: color @@html:<font color=></font>@@
+#+PROPERTY:  header-args :padline no
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+LATEX_HEADER: \usepackage{kotex}
+#+latex_header: \hypersetup{colorlinks=true}
+* Ruby로 웹서버 만들기
+** Rails란
+#+begin_note
+ruby는 프로그래밍 언어다. ruby로 웹서버를 만들기 위해서는 ruby의 기본적인 함수로 짜기에는 너무 부담이 간다. 이미 누군가가 만들어 놓은 library를 사용하면 편하게 할 수 있다. 웹서버가 해야하는 기본적인 기능, 예를 들면 daemon처럼 계속 메모리에 있어야 하고, http 요청을 parsing할수 있어야 하고 db도 접속 할 수 있어야 하고...html과 같은 문서도 만들어낼 수 있어야 하고...이런것을 미리 구현한 library에 해당하는게 rails다. gem으로 rails를 설치하면 우리는 위의 웹서버의 기능을 구현하기 쉬워진다. rails는 library가 아닌 framework로 부른다. 왜 그런지는 아래에 설명.
+#+end_note
+** Rails 와 library의 차이점
+#+begin_note
+Rails는 ruby의 framework다. framework는 library에 event처리 루틴을 추가한 것이다. event 처리루틴을 inverse order로 설명하기도 한다. 즉, 함수 호출의 방향이 반대를 의미한다. 이 부분을 좀 더 설명하겠다. ruby는 interpreter다. program을 해석하고 실행한다. 실행한다는 말은 cpu나 memory, I/O등 컴퓨터의 resource를 사용하는 명령어를 가지고 있다고 보면 된다. ruby는 기본적으로 이런 명령어들이 있다. 그리고 이런명령어들은 ruby에 포함되어있다. ruby가 수행하는 이런 기본적인 명령어들을 조합해서 새로운 함수를 만들수 있다. ruby program이 함수들을 정의하고 이런 함수를 사용한다. library라는건 이런 program들이 모아놓은 것이다. 다시 한번 정리하면, ruby와 ruby program그리고 library를 cpu가 실행하는 건, program이 resource들을 제어하는 명령어를 내린다고 보면된다. program이 order하는 것이다. 여기서 inverse order는 역관계다. resource가 program보고 처리해달라고 order를 내리는 것이다. PL에서 event라고 부르는 경우는 program에서 listener와 같이 resource에서 order가 오면 처리할 수 있는 루틴을 미리 짜놓는다. 이것은 미리 약속된 규약과 같은 것이다. framework는 이런 inverse order를 처리하는 listener와 같은 루틴이 있다는 면에서 library와 다른 것이다. 
+#+end_note

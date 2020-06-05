@@ -18,7 +18,7 @@
 ** version이란?
  #+begin_important
  git은 철저하게 program개발을 도와주는 infra tool이다. sw 개발을 도와주기 위한 목적이다. sw를 개발은 여러사람이 작업을 하며 공통된 source에서 기능을 하나 하나 추가해 나가는 개발방법을 따를때, 개발자들이 서로다른 source code로 작업을 할때 발생되는 code 불일치의 문제를 없애기 위해서 만들어졌다. 그래서 본래의 의도나 목적에 벗어나서 설명이 될 수 없다. git은 sw란 여러사람이 각자의 기능을 만들고 이를 합쳐서 version(완성된 program)이 나온다는 전제를 가지고 있다. version에서 미비하고 추가가 필요할때는 또 다시 여러 개발자가 개발을 하고 다시 통합해서 또 다른 version을 만든다.
- version은 완성된 program을 의미하며, 모든 개발자가 동일한 source code로 부터 개발을 시작할 수 있는 시작점이기도 하다. git은 개발자가 가진 다른 source code들을 합쳐주고, 동일한 code를 유지하는 기능이 주된 목적이라고 할 수 있다. git의 목적과 의도에 맞게 사용해야 한다. 이런 의도에서 주목할 만한 용어가 있다. 
+ version은 여러명의 개발자가 만든 source를 합친 완성된 program을 의미하며, 모든 개발자가 동일한 source code로 부터 개발을 시작할 수 있는 시작점이기도 하다. git은 version control management라는 말에서 알수 있듯이, version이란 단어가 핵심이다. version은 소스 코드를 합치는것이 가장 중요한 역할이라 할수 있다. 왜냐면 서로 다르게 개발된 source code를 합치면서 발생하는 code 불일치 문제 해결로 나온 툴이니까..그러니  협업을 하는데 있어서 개발자가 가진 다른 source code들을 합쳐주고, 동일한 code를 유지하는 기능이 주 목적이라고 할 수 있다. git의 목적과 의도에 맞게 사용해야 한다. 이런 의도에서 주목할 만한 용어가 있다. 
 
 - tracking: git은 동일한 source code를 유지하기 위해서 비교를 한다. 비교를 통해서만 update가 가능하고, update는 동일한 source code를 보장한다. 비교에는 기준이 되는 대상과 비교할 대상이 필요하다. 두 개의 대상은 항상 tracking되어야만 한다. 즉 changes가 발생할때, 그 changes 정보를 알고 있어야  한다는 뜻이다. 그것을 tracking이라고 한다.  예를 들어서 upstream의 A branch와 downstream에서 가지고 있는 A를 가리키는 remote branch가 서로 다른 commit을 가리키고 있다면 비교를 통해서 부족한 commit들을 download받아 update한다. 그러면 A를 가리키는 local의 remote branch는 update되어서 upstream의 A branch가 가리키는 commit과 동일한 local commit을 가리키게 되는데, 이렇게 changes를 유지하는게 tracking이다. 모든 branch는 changes를 유지하고 있기 때문에 tracking branch라고도 하고 원격에 있는 branch를 local에도 동일하게 유지하기 때문에 remote tracking branch라고도 부른다.
  #+end_important
@@ -26,9 +26,18 @@
 * Git 사용(Local)
 ** git의 local사용에 대한 오해
 #+begin_note
-local에서 개인개발자 혼자 작업할때는 git이 그닥 필요 없을 수 있다. 왜냐 git의 목적은 개발자들이 가진 서로 다른 souce code를 합치는 중요한 기능을 사용하지 않기 때문이다. local에서 여러명의 개발자가 git을 사용한다면 문제는 없다.
+local에서 개인개발자 혼자 작업할때는 git이 그닥 필요 없을 수 있다. 왜냐 git의 목적은 개발자들이 가진 서로 다른 souce code를 합치는 중요한 기능이 있는데, 이 기능을 사용하지 않기 때문이다. local에서 여러명의 개발자가 git을 사용한다면 git의 목적에 맞게 사용할 수는 있다. 하지만, 보통 local에서 여러명의 개발자가 사용하지는 않는다. 그러면 local에선 어떤 일을 하는가? git의 목적은 모든 개발자가 동일한 souce code를 시작점으로 삼아, 개발을 통해서 만들어진 서로다른 code들을 합쳐서 완성본(version)을 하나 하나 만들어가는 과정이라고 말했다. local에서 git은  보통 개발자(사용자) 한명만 사용한다. git이 가진 거대 담론, 여러개발자가 생산한 code를 합치는 기능은 다른 곳에서 하고 local에서는 자신의 기능 개발을 할때 local git을 사용한다. 예를 들어보자. 개발자가 어떤 기능을 맡았다고 하자. 그 기능을 구현하기 위해서 여러 작은 기능이 있을 수 있다.  여러 작은 기능들은 합쳐져서 하나의 완성된 기능을 가진 version을 만들어 낼 것이다. 이것이 local에서 git이 사용되는 이유다. 즉 local에서 git을 사용하는 이유는, 작은 기능을 나타내는  source code들의 통합에 있다. 작은 source code를 branch로 설명한다면. 이 branch들을 합쳐서 하나의 version(완성본)을 만들어 내는게 local git을 사용하는 이유다. 
+#+end_note
+** master branch
+#+begin_note
+사용자 한명이 사용하는 local git이던, 여러명이 사용하는 upstream, downstream git이던, git은 source code를 통합해서 version을 만들어내야 한다. 각각의 source code들은 어차피 branch로 표현된다. 여기서 통합된 version을 유지하는 branch가 있다. 그것의 이름을 보통 master branch라고 한다. local git에서 master branch가 있고, server에도 master branch가 있다. 즉 version을 유지하는 source code의 commit line history라고 봐도 된다.
 #+end_note
 * Git 사용(Remote) 
+** remote git
 #+begin_note
-
+git은 여러 개발자의 협업을 위해서 사용된다. 각각의 개발자는 전체 프로그램의 일부분에 대한 책임이 있다. 그래서 local git에서는 개발자가 자신이 맡은 업무에 대한 version관리를 하고, 해당 version들은   master branch에서 유지한다. local git은 그렇다. 그런데 실제 우리가 git에 바라는 것은 전체프로그램의 완성본(version)을 유지하고 관리하는 것이다. 이것은 local git이 아닌 또 다른 git이 필요함을 말한다. 협업을 하는 경우, 개발자가 2명 이상인 경우, server git이 필요하다. 이 server git을 remote라고 흔히 말한다. server git은 어느 한 개발자의 소유가 아니다.  
+#+end_note
+** remote git의 본질
+#+begin_note
+remote git을 git간의 연결로만 생각하면 곤란하다. url을 통해서 연결은 가능하다. 하지만, 서로 간 동기화하려는 목적이 더 크기 때문에 단순한 연결만 생각하면 안된다. 두가지 상황을 제시해보겠다. 내가 어떤 source code를 clone해서 local git이 있다. 여기에 remote로 쌩판 새로운 다른 source code를 연결해서 push나 pull을 할 수 있을까? 답은 불가능하다. 왜냐면 시작점이 다르기 때문이다. push나 pull을 하기 위해서는 제일 먼저 비교를 해야 한다. 비교는 remote tracking branch가 비교대상이다. 즉  server가 가진 master branch와 내가 가진 origin/master가 같은지 다른지를 비교해야 한다. 그렇게 하기 위해서 내가가진 .git폴더의 /refs/origin/master라는 branch를 server에 보내야 한다. 그런데 나에게는 우선 origin/master가 없다. 그래서 에러가 난다. tracking branch가 없다는 것이다. 그러면 tracking branch를 local에서 만들어보자. 현재 master가 가리키는 commit을 tracking branch로 만들자. 이렇게 하고 다시 pull이나 fetch를 해보자. 내가 만든 tracking branch를 server에 보낸다. 그런데 동일한 commit이 없다. 에러가 난다. 시작점이 없다는 뜻이다. 같은 시작점을 나타내는 commit이 없기 때문에 push나 pull을 할수 없다. 같은 commit을 가리키는 시작점을 가질려면, clone을 하던가, 아니면 .git만 만들고 commit이 없는 상태에서 tracking branch를 만들고 땡겨오는 수 밖에 없다.
 #+end_note

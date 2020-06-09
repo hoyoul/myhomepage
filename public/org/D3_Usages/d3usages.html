@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-06-08 Mon 21:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>D3 Usages</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Hoyoul Park" />
+<meta name="description" content="Org-HTML export made simple."
+ />
+<meta name="keywords" content="org-mode, export, html, theme, style, css, js, bigblow" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">D3 Usages</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4c3c114">1. [1장] 시각적 스토리 텔링과 D3</a></li>
+<li><a href="#org82af7fe">2. [2장] 데이터 기반 스토리를 찾고 시각적으로 전달하기</a>
+<ul>
+<li><a href="#orga3a0078">2.1. summary</a></li>
+</ul>
+</li>
+<li><a href="#orgce17eb9">3. [3장] SVG 확장가능한 벡터 그래픽</a>
+<ul>
+<li><a href="#org83c04e3">3.1. svg에서 제공하는 html element로 원만들기 - 원만들기</a></li>
+<li><a href="#orgebaabc4">3.2. svg tag에 대한 css처리</a></li>
+<li><a href="#orgf87f9fc">3.3. 직사각형 - rect</a></li>
+<li><a href="#org6843ac4">3.4. 모서리가 둥근 직사각형</a></li>
+<li><a href="#orgbeac341">3.5. 타원 - ellipse</a></li>
+<li><a href="#orgc4c0471">3.6. 다각형 - polygon</a></li>
+<li><a href="#org586f03f">3.7. 선 - line</a></li>
+<li><a href="#orgf2b08e7">3.8. 패스 - path</a></li>
+</ul>
+</li>
+<li><a href="#orgd97fe64">4. [4장] D3 선택 영역으로 웹페이지 꾸미기</a></li>
+<li><a href="#orgcf2bdd2">5. [5장] 데이터 결합</a></li>
+<li><a href="#org31c407e">6. [6장] 그래프 크기 조정 및 축 추가하기</a></li>
+<li><a href="#orgfe0c9e7">7. [7장] 외부 데이터 로딩하고 필터링 하기</a></li>
+<li><a href="#org91ef4a6">8. [8장] 인터랙티브한 동적 시각화 만들기</a></li>
+<li><a href="#orgafa4a04">9. [9장] 재생버튼 추가하기</a></li>
+<li><a href="#org3305a75">10. [10장] 나만의 시각화 만들기</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4c3c114" class="outline-2">
+<h2 id="org4c3c114"><span class="section-number-2">1</span> [1장] 시각적 스토리 텔링과 D3</h2>
+<div class="outline-text-2" id="text-1">
+<div class="note">
+<p>
+1장에선 별다른 내용이 없다.  D3와 관련한 내용은 아래와 같다.
+</p>
+<ul class="org-ul">
+<li>D3 (Data-Driven Documents)의 줄임말과 만든사람인 Mike Bostock</li>
+<li>D3는 javascript library다. SVG(Scalable Vector Graphics)을 사용한다.</li>
+</ul>
+
+<p>
+위 2가지가 그나마 필요한 내용이다.
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org82af7fe" class="outline-2">
+<h2 id="org82af7fe"><span class="section-number-2">2</span> [2장] 데이터 기반 스토리를 찾고 시각적으로 전달하기</h2>
+<div class="outline-text-2" id="text-2">
+<div class="note">
+<p>
+D3와 관련된 내용은 2장에도 별로 없다. data를 어떻게 얻고 어떻게 표현할까에 대한 고민이 담겨있다.
+</p>
+
+<ul class="org-ul">
+<li>raw data를 얻을 수 있는 곳</li>
+</ul>
+<p>
+UN, 세계은행(WB), 국제 통화기금(IMF), 경제협력개발기구(OECD), <a href="http://kosis.kr">국가통계포털</a>, <a href="http://ecos.bok.or.kr">한국은행 경제통계시스템</a>
+</p>
+
+<ul class="org-ul">
+<li>어떻게 무엇을 보여줄 것인가? [연도별 연령분포 데이터]</li>
+</ul>
+<p>
+. 목적이 있을때, graph선택이 용이할 수 있다. 여러 목표가 있을 수 있다.  . 연도별 연령 분포 데이터는
+년도에 따른 특정연령층의 증가 감소를 파악 . 해당 연도별 연령대 구성 정보 파악.  . 데이터에서 보여줄
+정보의 범위를 설정(5살 단위로)
+</p>
+<ul class="org-ul">
+<li>어떤 형태로 보여줄 것인가를 설정, 어떤 chart로 보여줄까?</li>
+</ul>
+<p>
+[1] column chart . 년도별 age를 grouping해서 보여줌.  . column chart(막대그래프)로 보여줄때 data의
+범위를 5살로 grouping했을때, 너무 많은 group들이 막대그래프에 모두 보이면 산만해 보임 . 막대그래프는
+4개 정도가 적당.
+</p>
+
+<p>
+[2] 누적 column chart . 년도에 나이분포를 모두 보여준다. 훨씬 보기 좋다. 연도별 연령대 구성정보를
+파악하기 좋다. 막대그래프 한개에 모든 연령정보가 들어가 있기 때문이다.  각각의 연령층을 동일한
+색으로 표시하면, 연도별, 구성 연령대의 변화여부를 파악하기 쉽다. 하지만 단점이 같은 연령대의 크기
+비교가 쉽지 않다는 것이다.  막대 그래프는 각 연령이 y값이 0으로 부터 동일하게 시작하기 때문에 연도별
+연령층의 크기 비교가 매우 쉽다.  .  [3] 선 그래프(line chart) . 선그래프가 누적그래프보다 나은점은
+좀더 시각적으로 년도별 연령대 구성정보의 변화를 더 잘 보여준다. 예를 들어서, 30대의 인구구성이
+연도별로 표현될때, 누적그래프보다 변화를 더 잘 보여준다.
+</p>
+
+<p>
+[4] 원 그래프 . 별로 유용하지 않다. 쓰지 마라.
+</p>
+
+<p>
+[5] 막대 그래프 . column chart와 비슷하지만 다르다.  . column chart는 x축(연도) 눈금 하나에 여러개의
+막대그래프가 있다. 하지만, 막대 그래프는 한 눈금에 하나의 막대 그래프가 있는 형태다.  . column
+chart가 x축(연도) 하나의 눈금에서 모든 연령대의 정보를 보여주고 y축에서 연령대별 구성크기를 보여주는
+반면에 막대 그래프는 x축 눈금 하나에 하나의 연령막대 밖에 없어서 보여주는 정보의 양은 줄어든다. 즉
+막대그래프에서는 x축은 연령대 정보를 보여주고 y축에서 크기를 보여준다. 따라서 연도에 따른 정보
+비교가 안되는 문제가 있다. 이 문제는 막대그래프 chart를 연도별로 여러개, 그리고 작게 보여주는 형태로
+극복한다.  이것을 trellis chart, grid chart, panel chart 혹은 lattice chart라고 부른다.  . Edward
+Tufte는 small multiple이라고 불렀다.
+</p>
+
+<ul class="org-ul">
+<li>그래프 선택의 문제</li>
+</ul>
+<p>
+. 그래프를 선택하는건 data를 모두 graph로 만든 후에 선택할 수 있다. 처음에는 그렇게 해도 된다. 어느
+정도 직관이 생기면 graph를 다 만들지 않고도 선택할 수 있다. 어떤 graph를 선택할까에 대한 guide
+line으로 Dr. Andrew Abela의 guide도 좋다.  <a href="https://extremepresentation.typepad.com/files/choosing-a-good-chart-09.pdf">graphguide</a>
+</p>
+<ul class="org-ul">
+<li>graph 실습</li>
+</ul>
+<p>
+. 이 책에서는 막대그래프 하나만 만들 것이다.
+</p>
+
+</div>
+</div>
+<div id="outline-container-orga3a0078" class="outline-3">
+<h3 id="orga3a0078"><span class="section-number-3">2.1</span> summary</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="note">
+<p>
+여러개의 chart별 장단점이 있다. 중요한 건 보여주고 싶은 게 무엇이냐에 따라서 graph가 선택된다는
+것이다.  연도별로 세상이 고령화 되고 있다는 것을 보여주고 싶다면, 즉, 추세를 보여주고 싶다면, 누적
+column chart나 line chart가 좋은 선택이다.  추세가 아닌 특정연 연도별 비교가 목적이라면 small
+multiple이 좋은 선택이다.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce17eb9" class="outline-2">
+<h2 id="orgce17eb9"><span class="section-number-2">3</span> [3장] SVG 확장가능한 벡터 그래픽</h2>
+<div class="outline-text-2" id="text-3">
+<div class="note">
+<p>
+여기서는 svg를 사용하는 법을 배운다. D3가 SVG를 이용하기 때문이다.  SVG 자체는 HTML5의 default로
+내장된 tag를 제공한다. 즉 이것은 D3를 사용하지 않는다는 것이다. SVG는 도형을 그릴수 있는 함수를
+제공한다. 함수는 일종의 법칙이다. 예를 들어 원을 나타내는 함수의 경우 특정 인자를 주면 모든 원을
+만들 수 가 있는 것이다. SVG는 Tag로 기술 될 수 있다. 이말은 무슨 말이냐면 html tag처럼 code+data가
+data로 주어진다고 보면된다. SVG에서 해당 tag를 interpret해서 code와 data를 인식한다.
+</p>
+
+<p>
+SVG로 기본 도형을 만드는 법을 설명하고, 막대그래프를 그리는게 이장의 목표다.
+</p>
+
+</div>
+</div>
+<div id="outline-container-org83c04e3" class="outline-3">
+<h3 id="org83c04e3"><span class="section-number-3">3.1</span> svg에서 제공하는 html element로 원만들기 - 원만들기</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="note">
+<p>
+원을 만든다. HTML tag로 만들겠다.  아래와 같이 svg tag아래에 circle이라는 tag를
+사용한다. circle이라는 tag에는 property가 있다. inline tag에서 기술한다.
+</p>
+<pre class="example">
+&lt;svg width = "200px" height= "200px"&gt;
+&lt;circle cx ="100" cy ="100" r = "50" /&gt;
+&lt;/svg&gt;
+</pre>
+
+<blockquote>
+<svg width = "200px" height= "200px">
+<circle cx ="100" cy ="100" r = "50" />
+</svg>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgebaabc4" class="outline-3">
+<h3 id="orgebaabc4"><span class="section-number-3">3.2</span> svg tag에 대한 css처리</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="note">
+<p>
+svg에서 제공하는 도형관련 tag들의 property들을 css에서 처리하는 게 가능 하다. 그런데 html과는 차이가
+있다. 
+</p>
+
+<p>
+(1) style 속성만 css에 기술
+</p>
+
+<p>
+ html tag의 속성은 style 속성이 있고, style이 아닌 속성이
+있다. style 속성은 font모양, 색과 같은 것이다. 반면에, position이나 size를 나타내는 속성은
+style속성이 아니다. 속성을 2가지로 나눈 이유는, style 속성은 css에서 설정이 가능하지만, style이 아닌
+속성은 설정이 불가능하기 때문이다.  
+</p>
+
+<p>
+<b>그래서 핵심은 style속성은 css에 기술하고 style이 아닌 속성은 inline-tag에 기술한다.</b>
+</p>
+
+<p>
+(2) border와 stroke와 같은 다른 속성명
+</p>
+
+<p>
+div 태그의 테두리 속성은 border 이지만, svg에서 접근하는 테두리의 속성은 stroke로 기술된다.
+</p>
+
+
+<pre class="example">
+ #+BEGIN_EXPORT html
+
+&lt;svg width = "200px" height= "200px"&gt;
+&lt;circle cx ="100" cy ="100" r = "20" /&gt;
+&lt;/svg&gt;
+#+END_EXPORT
+</pre>
+
+<style>
+.styled_circle
+{
+       fill: darkmagenta;
+       stroke: black;
+       stroke-width: 5; 
+}
+</style>
+<svg width = "200px" height= "200px">
+<circle cx ="150" cy ="50" r = "20" class="styled_circle"/>
+<circle cx ="35" cy ="50" r = "30" class="styled_circle"/>
+<circle cx ="80" cy ="100" r = "60" class="styled_circle"/>
+</svg>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgf87f9fc" class="outline-3">
+<h3 id="orgf87f9fc"><span class="section-number-3">3.3</span> 직사각형 - rect</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="note">
+<ul class="org-ul">
+<li>rect</li>
+<li><p>
+x,y,width, height
+</p>
+
+<pre class="example">
+#+BEGIN_EXPORT html
+&lt;style&gt;
+.style_rect1{
+fill: red;
+stroke: indigo;
+stroke-width:5; 
+}
+&lt;/style&gt;
+
+&lt;svg width = "400px" height= "300px"&gt;
+&lt;rect x ="200" y ="10" width = "200" height = "200" class = "style_rect1" /&gt;
+&lt;/svg&gt;
+
+#+END_EXPORT
+</pre></li>
+</ul>
+
+<style>
+.style_rect1{
+fill: red;
+stroke: indigo;
+stroke-width:5; 
+}
+</style>
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect1" />
+
+</svg>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org6843ac4" class="outline-3">
+<h3 id="org6843ac4"><span class="section-number-3">3.4</span> 모서리가 둥근 직사각형</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="note">
+<ul class="org-ul">
+<li><b>tag</b>: <i>rect</i></li>
+<li><p>
+<b>property</b>: <i>x,y,width,height, rx,ry</i>
+</p>
+
+<pre class="example">
+#+BEGIN_EXPORT html
+&lt;style&gt;
+.style_rect2{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+&lt;/style&gt;
+
+&lt;svg width = "400px" height= "300px"&gt;
+&lt;rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect2" /&gt;
+&lt;/svg&gt;
+#+END_EXPORT
+</pre></li>
+</ul>
+
+<style>
+.style_rect2{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+</style>
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect2" />
+
+</svg>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgbeac341" class="outline-3">
+<h3 id="orgbeac341"><span class="section-number-3">3.5</span> 타원 - ellipse</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="note">
+<ul class="org-ul">
+<li><b>tag</b>: <i>ellipse</i></li>
+<li><b>properties</b>: <i>cx,cy,rx,ry</i></li>
+<li>사용법</li>
+</ul>
+<style>
+.style_ellipse{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+</style>
+
+<svg width = "400px" height= "300px">
+<ellipse x ="200" y ="100" rx = "20" ry = "20" class = "style_ellipse" />
+</svg>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4c0471" class="outline-3">
+<h3 id="orgc4c0471"><span class="section-number-3">3.6</span> 다각형 - polygon</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="note">
+<p>
+
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org586f03f" class="outline-3">
+<h3 id="org586f03f"><span class="section-number-3">3.7</span> 선 - line</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="note">
+<p>
+
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgf2b08e7" class="outline-3">
+<h3 id="orgf2b08e7"><span class="section-number-3">3.8</span> 패스 - path</h3>
+<div class="outline-text-3" id="text-3-8">
+<div class="note">
+<p>
+
+</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd97fe64" class="outline-2">
+<h2 id="orgd97fe64"><span class="section-number-2">4</span> [4장] D3 선택 영역으로 웹페이지 꾸미기</h2>
+</div>
+<div id="outline-container-orgcf2bdd2" class="outline-2">
+<h2 id="orgcf2bdd2"><span class="section-number-2">5</span> [5장] 데이터 결합</h2>
+</div>
+<div id="outline-container-org31c407e" class="outline-2">
+<h2 id="org31c407e"><span class="section-number-2">6</span> [6장] 그래프 크기 조정 및 축 추가하기</h2>
+</div>
+<div id="outline-container-orgfe0c9e7" class="outline-2">
+<h2 id="orgfe0c9e7"><span class="section-number-2">7</span> [7장] 외부 데이터 로딩하고 필터링 하기</h2>
+</div>
+<div id="outline-container-org91ef4a6" class="outline-2">
+<h2 id="org91ef4a6"><span class="section-number-2">8</span> [8장] 인터랙티브한 동적 시각화 만들기</h2>
+</div>
+<div id="outline-container-orgafa4a04" class="outline-2">
+<h2 id="orgafa4a04"><span class="section-number-2">9</span> [9장] 재생버튼 추가하기</h2>
+</div>
+<div id="outline-container-org3305a75" class="outline-2">
+<h2 id="org3305a75"><span class="section-number-2">10</span> [10장] 나만의 시각화 만들기</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Hoyoul Park</p>
+<p class="date">Created: 2020-06-08 Mon 21:19</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

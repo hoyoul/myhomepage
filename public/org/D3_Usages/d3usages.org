@@ -1,0 +1,255 @@
+#+TITLE: D3 Usages
+#+AUTHOR: Hoyoul Park
+#+DESCRIPTION: Org-HTML export made simple.
+#+KEYWORDS:  org-mode, export, html, theme, style, css, js, bigblow
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 toc:t num:2
+#+MACRO: color @@html:<font color=></font>@@
+#+PROPERTY:  header-args :padline no
+#+SETUPFILE: ~/.emacs.d/presentation/readtheorg/setup/theme-readtheorg-local.setup
+#+LATEX_HEADER: \usepackage{kotex}
+#+latex_header: \hypersetup{colorlinks=true}
+* [1장] 시각적 스토리 텔링과 D3
+#+begin_note
+1장에선 별다른 내용이 없다.  D3와 관련한 내용은 아래와 같다.
+- D3 (Data-Driven Documents)의 줄임말과 만든사람인 Mike Bostock
+- D3는 javascript library다. SVG(Scalable Vector Graphics)을 사용한다.
+
+위 2가지가 그나마 필요한 내용이다.
+#+end_note
+* [2장] 데이터 기반 스토리를 찾고 시각적으로 전달하기
+#+begin_note
+D3와 관련된 내용은 2장에도 별로 없다. data를 어떻게 얻고 어떻게 표현할까에 대한 고민이 담겨있다.
+
+- raw data를 얻을 수 있는 곳
+UN, 세계은행(WB), 국제 통화기금(IMF), 경제협력개발기구(OECD), [[http://kosis.kr][국가통계포털]], [[http://ecos.bok.or.kr][한국은행 경제통계시스템]]
+
+- 어떻게 무엇을 보여줄 것인가? [연도별 연령분포 데이터]
+. 목적이 있을때, graph선택이 용이할 수 있다. 여러 목표가 있을 수 있다.  . 연도별 연령 분포 데이터는
+년도에 따른 특정연령층의 증가 감소를 파악 . 해당 연도별 연령대 구성 정보 파악.  . 데이터에서 보여줄
+정보의 범위를 설정(5살 단위로)
+- 어떤 형태로 보여줄 것인가를 설정, 어떤 chart로 보여줄까?
+[1] column chart . 년도별 age를 grouping해서 보여줌.  . column chart(막대그래프)로 보여줄때 data의
+범위를 5살로 grouping했을때, 너무 많은 group들이 막대그래프에 모두 보이면 산만해 보임 . 막대그래프는
+4개 정도가 적당.
+
+[2] 누적 column chart . 년도에 나이분포를 모두 보여준다. 훨씬 보기 좋다. 연도별 연령대 구성정보를
+파악하기 좋다. 막대그래프 한개에 모든 연령정보가 들어가 있기 때문이다.  각각의 연령층을 동일한
+색으로 표시하면, 연도별, 구성 연령대의 변화여부를 파악하기 쉽다. 하지만 단점이 같은 연령대의 크기
+비교가 쉽지 않다는 것이다.  막대 그래프는 각 연령이 y값이 0으로 부터 동일하게 시작하기 때문에 연도별
+연령층의 크기 비교가 매우 쉽다.  .  [3] 선 그래프(line chart) . 선그래프가 누적그래프보다 나은점은
+좀더 시각적으로 년도별 연령대 구성정보의 변화를 더 잘 보여준다. 예를 들어서, 30대의 인구구성이
+연도별로 표현될때, 누적그래프보다 변화를 더 잘 보여준다.
+
+[4] 원 그래프 . 별로 유용하지 않다. 쓰지 마라.
+
+[5] 막대 그래프 . column chart와 비슷하지만 다르다.  . column chart는 x축(연도) 눈금 하나에 여러개의
+막대그래프가 있다. 하지만, 막대 그래프는 한 눈금에 하나의 막대 그래프가 있는 형태다.  . column
+chart가 x축(연도) 하나의 눈금에서 모든 연령대의 정보를 보여주고 y축에서 연령대별 구성크기를 보여주는
+반면에 막대 그래프는 x축 눈금 하나에 하나의 연령막대 밖에 없어서 보여주는 정보의 양은 줄어든다. 즉
+막대그래프에서는 x축은 연령대 정보를 보여주고 y축에서 크기를 보여준다. 따라서 연도에 따른 정보
+비교가 안되는 문제가 있다. 이 문제는 막대그래프 chart를 연도별로 여러개, 그리고 작게 보여주는 형태로
+극복한다.  이것을 trellis chart, grid chart, panel chart 혹은 lattice chart라고 부른다.  . Edward
+Tufte는 small multiple이라고 불렀다.
+
+- 그래프 선택의 문제
+. 그래프를 선택하는건 data를 모두 graph로 만든 후에 선택할 수 있다. 처음에는 그렇게 해도 된다. 어느
+정도 직관이 생기면 graph를 다 만들지 않고도 선택할 수 있다. 어떤 graph를 선택할까에 대한 guide
+line으로 Dr. Andrew Abela의 guide도 좋다.  [[https://extremepresentation.typepad.com/files/choosing-a-good-chart-09.pdf][graphguide]]
+- graph 실습
+. 이 책에서는 막대그래프 하나만 만들 것이다.
+#+end_note
+** summary
+#+begin_note
+여러개의 chart별 장단점이 있다. 중요한 건 보여주고 싶은 게 무엇이냐에 따라서 graph가 선택된다는
+것이다.  연도별로 세상이 고령화 되고 있다는 것을 보여주고 싶다면, 즉, 추세를 보여주고 싶다면, 누적
+column chart나 line chart가 좋은 선택이다.  추세가 아닌 특정연 연도별 비교가 목적이라면 small
+multiple이 좋은 선택이다.
+
+#+end_note
+* [3장] SVG 확장가능한 벡터 그래픽
+#+begin_note
+여기서는 svg를 사용하는 법을 배운다. D3가 SVG를 이용하기 때문이다.  SVG 자체는 HTML5의 default로
+내장된 tag를 제공한다. 즉 이것은 D3를 사용하지 않는다는 것이다. SVG는 도형을 그릴수 있는 함수를
+제공한다. 함수는 일종의 법칙이다. 예를 들어 원을 나타내는 함수의 경우 특정 인자를 주면 모든 원을
+만들 수 가 있는 것이다. SVG는 Tag로 기술 될 수 있다. 이말은 무슨 말이냐면 html tag처럼 code+data가
+data로 주어진다고 보면된다. SVG에서 해당 tag를 interpret해서 code와 data를 인식한다.
+
+SVG로 기본 도형을 만드는 법을 설명하고, 막대그래프를 그리는게 이장의 목표다.
+#+end_note
+** svg에서 제공하는 html element로 원만들기 - 원만들기
+#+begin_note
+원을 만든다. HTML tag로 만들겠다.  아래와 같이 svg tag아래에 circle이라는 tag를
+사용한다. circle이라는 tag에는 property가 있다. inline tag에서 기술한다.
+ #+begin_example
+<svg width = "200px" height= "200px">
+<circle cx ="100" cy ="100" r = "50" />
+</svg>
+ #+end_example
+
+ #+begin_quote
+ #+BEGIN_EXPORT html
+<svg width = "200px" height= "200px">
+<circle cx ="100" cy ="100" r = "50" />
+</svg>
+#+END_EXPORT
+ #+end_quote
+#+end_note
+** svg tag에 대한 css처리
+#+begin_note
+svg에서 제공하는 도형관련 tag들의 property들을 css에서 처리하는 게 가능 하다. 그런데 html과는 차이가
+있다. 
+
+ (1) style 속성만 css에 기술
+
+ html tag의 속성은 style 속성이 있고, style이 아닌 속성이
+있다. style 속성은 font모양, 색과 같은 것이다. 반면에, position이나 size를 나타내는 속성은
+style속성이 아니다. 속성을 2가지로 나눈 이유는, style 속성은 css에서 설정이 가능하지만, style이 아닌
+속성은 설정이 불가능하기 때문이다.  
+
+*그래서 핵심은 style속성은 css에 기술하고 style이 아닌 속성은 inline-tag에 기술한다.*
+
+(2) border와 stroke와 같은 다른 속성명
+
+div 태그의 테두리 속성은 border 이지만, svg에서 접근하는 테두리의 속성은 stroke로 기술된다.
+
+
+ #+begin_example
+ #+BEGIN_EXPORT html
+
+<svg width = "200px" height= "200px">
+<circle cx ="100" cy ="100" r = "20" />
+</svg>
+#+END_EXPORT
+ #+end_example
+
+ #+BEGIN_EXPORT html
+<style>
+.styled_circle
+{
+       fill: darkmagenta;
+       stroke: black;
+       stroke-width: 5; 
+}
+</style>
+<svg width = "200px" height= "200px">
+<circle cx ="150" cy ="50" r = "20" class="styled_circle"/>
+<circle cx ="35" cy ="50" r = "30" class="styled_circle"/>
+<circle cx ="80" cy ="100" r = "60" class="styled_circle"/>
+</svg>
+#+END_EXPORT
+
+#+end_note
+** 직사각형 - rect
+#+begin_note
+- rect
+- x,y,width, height
+
+ #+begin_example
+#+BEGIN_EXPORT html
+<style>
+.style_rect1{
+fill: red;
+stroke: indigo;
+stroke-width:5; 
+}
+</style>
+
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" class = "style_rect1" />
+</svg>
+
+#+END_EXPORT
+ #+end_example
+
+#+BEGIN_EXPORT html
+<style>
+.style_rect1{
+fill: red;
+stroke: indigo;
+stroke-width:5; 
+}
+</style>
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect1" />
+
+</svg>
+#+END_EXPORT
+
+
+#+end_note
+** 모서리가 둥근 직사각형 
+#+begin_note
+- *tag*: /rect/
+- *property*: /x,y,width,height, rx,ry/
+
+ #+begin_example
+#+BEGIN_EXPORT html
+<style>
+.style_rect2{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+</style>
+
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect2" />
+</svg>
+#+END_EXPORT
+ #+end_example
+
+#+BEGIN_EXPORT html
+<style>
+.style_rect2{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+</style>
+<svg width = "400px" height= "300px">
+<rect x ="200" y ="10" width = "200" height = "200" rx = "10" ry = "10" class = "style_rect2" />
+
+</svg>
+#+END_EXPORT
+#+end_note
+** 타원 - ellipse
+#+begin_note
+- *tag*: /ellipse/
+- *properties*: /cx,cy,rx,ry/
+- 사용법
+#+BEGIN_EXPORT html
+<style>
+.style_ellipse{
+fill: magenta;
+stroke: gray;
+stroke-width:5; 
+}
+</style>
+
+<svg width = "400px" height= "300px">
+<ellipse x ="200" y ="100" rx = "20" ry = "20" class = "style_ellipse" />
+</svg>
+#+END_EXPORT
+
+#+end_note
+** 다각형 - polygon
+#+begin_note
+
+#+end_note
+** 선 - line
+#+begin_note
+
+#+end_note
+** 패스 - path
+#+begin_note
+
+#+end_note
+* [4장] D3 선택 영역으로 웹페이지 꾸미기
+* [5장] 데이터 결합
+* [6장] 그래프 크기 조정 및 축 추가하기
+* [7장] 외부 데이터 로딩하고 필터링 하기
+* [8장] 인터랙티브한 동적 시각화 만들기
+* [9장] 재생버튼 추가하기
+* [10장] 나만의 시각화 만들기
+

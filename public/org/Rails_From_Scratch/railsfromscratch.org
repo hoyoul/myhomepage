@@ -18,3 +18,18 @@ ruby는 프로그래밍 언어다. ruby로 웹서버를 만들기 위해서는 r
 #+begin_note
 Rails는 ruby의 framework다. framework는 library에 event처리 루틴을 추가한 것이다. event 처리루틴을 inverse order로 설명하기도 한다. 즉, 함수 호출의 방향이 반대를 의미한다. 이 부분을 좀 더 설명하겠다. ruby는 interpreter다. program을 해석하고 실행한다. 실행한다는 말은 cpu나 memory, I/O등 컴퓨터의 resource를 사용하는 명령어를 가지고 있다고 보면 된다. ruby는 기본적으로 이런 명령어들이 있다. 그리고 이런명령어들은 ruby에 포함되어있다. ruby가 수행하는 이런 기본적인 명령어들을 조합해서 새로운 함수를 만들수 있다. ruby program이 함수들을 정의하고 이런 함수를 사용한다. library라는건 이런 program들이 모아놓은 것이다. 다시 한번 정리하면, ruby와 ruby program그리고 library를 cpu가 실행하는 건, program이 resource들을 제어하는 명령어를 내린다고 보면된다. program이 order하는 것이다. 여기서 inverse order는 역관계다. resource가 program보고 처리해달라고 order를 내리는 것이다. PL에서 event라고 부르는 경우는 program에서 listener와 같이 resource에서 order가 오면 처리할 수 있는 루틴을 미리 짜놓는다. 이것은 미리 약속된 규약과 같은 것이다. framework는 이런 inverse order를 처리하는 listener와 같은 루틴이 있다는 면에서 library와 다른 것이다. 
 #+end_note
+* button_to사용법
+#+begin_note
+- 형식
+button_to(name = nil, options = nil, html_options = nil, &block) public
+<%= button_to '버튼이름', { (1)  } , {(2)} %>
+(1)에는 controller, action, parameter, method, data가 들어간다. data는 data confirm창을 의미하고 method는  get,post를 의미한다. 
+ex) :controller => "cont" , :action => "act", :station => "712"
+(2)에는 css를 위한 class나 id가 들어갈수 있다.
+ex) class: "css_btn"
+#+end_note
+* form_tag 사용법
+#+begin_note
+- 형식
+form_tag(url_for_options = {}, options = {}, &block) public
+#+end_note

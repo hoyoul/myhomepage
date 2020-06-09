@@ -9,4 +9,91 @@
 #+SETUPFILE: ~/.emacs.d/presentation/readtheorg/setup/theme-readtheorg-local.setup
 #+LATEX_HEADER: \usepackage{kotex}
 #+latex_header: \hypersetup{colorlinks=true}
-* emacs 
+* org mode에서 html 렌더링
+#+begin_note
+org 문서를 작성할때 html 코드를 기술하고 rendering하는 방식은 다음과 같다.
+code는 그냥 쓰면 되지만 rendering을 하려면, 
+
+ #+begin_example
+ #+BEGIN_EXPORT html
+ [html code]
+ #+END_EXPORT
+ #+end_example
+위와 같이 작성해야 한다.
+
+snippets로 이미 만들어 놓았다. html_snippets를 선택하면 된다. 
+
+#+end_note
+* org mode에서 svg 렌더링
+#+begin_note
+SVG는 html5에서 제공되는 기본 tag다. html과 동일하게 취급된다고 생각하면 된다.
+ #+begin_example
+
+#+BEGIN_export html
+<p> SVG sand box </p>
+<svg width ="500px"  height ="500px"> 
+     <circle cx="200" cy="100" r="50" />
+</svg>
+#+END_export
+
+#+end_example
+
+#+BEGIN_export html
+<p> SVG sand box </p>
+<svg width ="500px" height =="500px"> 
+     <circle cx="200" cy="100" r="50" />
+</svg>
+#+END_export
+
+#+end_note
+
+#+end_note
+* org mode에서 babel language buffer 사용하기
+#+begin_note
+org mode에서 literal programming을 하기 위해서는, code block을 잡을 수 있다. #+ begin_src [language] :results output을 명시하면 된다.
+그런데 org mode안에서의 code block은 해당 language mode가 가진 여러기능을 사용하지 못한다. org mode가 가진 minor mode의 기능들을 사용하는 것이 전부다. 그래서 새로운 buffer를 해당 language의 buffer mode로 바꿀 수 있다. 
+
+방법은 간단하다.
+
+C-'를 code block에서 누르면 새로운 buffer가 만들어진다.
+
+
+#+end_note
+* org mode에서 D3 사용
+#+begin_note
+
+아래와 같이 html로 출력하고, 그 안에서 d3 library를 load해서 사용하면 된다.
+#+begin_example
+
+#+BEGIN_export html
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<p> SVG sand box </p>
+
+<svg width= ="500px" height= =="500px"> 
+     <circle id="temp" cx="200" cy="100" r="50" />
+</svg>
+
+<script>
+d3.select("#temp").style("fill", "red");
+</script>
+#+END_export
+
+#+end_example
+
+#+BEGIN_export html
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<p> SVG sand box </p>
+
+<svg width= ="500px" height= =="500px"> 
+     <circle id="temp" cx="200" cy="100" r="50" />
+</svg>
+
+<script>
+d3.select("#temp").style("fill", "red");
+</script>
+#+END_export
+
+#+end_note
+
